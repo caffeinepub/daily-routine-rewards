@@ -1,20 +1,43 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="theme-color" content="#c9943a" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <meta name="theme-color" content="#7c3aed" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Distresso" />
+    <meta name="apple-mobile-web-app-title" content="DISTRESSO" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="description" content="Your daily routine and wellness companion" />
+    <meta name="application-name" content="DISTRESSO" />
+    <meta name="description" content="Your personal fitness, bodybuilding, and daily routine companion" />
+    <meta name="keywords" content="fitness, bodybuilding, workout, diet, routine, health" />
+    <!-- Security headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta name="referrer" content="no-referrer" />
+    <!-- Open Graph / PWA rich preview -->
+    <meta property="og:title" content="DISTRESSO" />
+    <meta property="og:description" content="Your personal fitness, bodybuilding, and daily routine companion" />
+    <meta property="og:image" content="/assets/uploads/distresso-1.png" />
+    <meta property="og:type" content="website" />
+    <!-- Manifest -->
     <link rel="manifest" href="/manifest.json" />
-    <link rel="apple-touch-icon" href="/assets/uploads/distresso-1.png" />
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="192x192" href="/assets/uploads/distresso-1.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/assets/uploads/distresso-1.png" />
+    <link rel="icon" type="image/png" href="/assets/uploads/distresso-1.png" />
     <title>DISTRESSO</title>
-    <script type="module" crossorigin src="/assets/index-BZqrMTqT.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-6IctKTq3.css">
+    <script type="module" crossorigin src="/assets/index-DQFGk26c.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Dfulucpm.css">
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js', { scope: '/' })
+            .catch(() => {});
+        });
+      }
+    </script>
   </body>
 </html>

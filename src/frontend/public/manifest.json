@@ -1,13 +1,42 @@
 {
-  "name": "DISTRESSO",
-  "short_name": "Distresso",
-  "description": "Your daily routine and wellness companion",
+  "id": "/",
+  "name": "DISTRESSO - Fitness & Routine",
+  "short_name": "DISTRESSO",
+  "description": "Your personal fitness, bodybuilding, and daily routine companion",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#1a1208",
-  "theme_color": "#c9943a",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "background_color": "#f0f4ff",
+  "theme_color": "#7c3aed",
   "orientation": "portrait-primary",
+  "lang": "en",
+  "categories": ["fitness", "health", "productivity", "lifestyle"],
   "icons": [
+    {
+      "src": "/assets/uploads/distresso-1.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/uploads/distresso-1.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/uploads/distresso-1.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/uploads/distresso-1.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "/assets/uploads/distresso-1.png",
       "sizes": "192x192",
@@ -19,6 +48,29 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "My Day",
+      "short_name": "My Day",
+      "description": "View your daily planner",
+      "url": "/?tab=myday",
+      "icons": [{"src": "/assets/uploads/distresso-1.png", "sizes": "96x96"}]
+    },
+    {
+      "name": "Fitness",
+      "short_name": "Fitness",
+      "description": "Track your fitness activity",
+      "url": "/?tab=fitness",
+      "icons": [{"src": "/assets/uploads/distresso-1.png", "sizes": "96x96"}]
+    },
+    {
+      "name": "Build",
+      "short_name": "Build",
+      "description": "Bodybuilding hub",
+      "url": "/?tab=build",
+      "icons": [{"src": "/assets/uploads/distresso-1.png", "sizes": "96x96"}]
     }
   ]
 }

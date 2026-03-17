@@ -8,6 +8,7 @@ import CalendarWidget from "./components/CalendarWidget";
 import ClockWidget from "./components/ClockWidget";
 import DiarySection from "./components/DiarySection";
 import FitnessTab from "./components/FitnessTab";
+import SafetyNotice from "./components/SafetyNotice";
 
 const qc = new QueryClient();
 
@@ -20,6 +21,9 @@ function AppContent() {
           "linear-gradient(170deg, oklch(0.94 0.03 230) 0%, oklch(0.97 0.015 240) 50%, oklch(0.96 0.01 250) 100%)",
       }}
     >
+      {/* Safety notice shown once on first launch */}
+      <SafetyNotice />
+
       {/* Header */}
       <header
         className="sticky top-0 z-40"
@@ -30,7 +34,7 @@ function AppContent() {
           boxShadow: "0 1px 12px oklch(0.55 0.22 280 / 0.08)",
         }}
       >
-        <div className="max-w-2xl mx-auto px-4 py-3 flex items-center">
+        <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <img
               src="/assets/uploads/logo-1.png"
@@ -52,6 +56,18 @@ function AppContent() {
             >
               DISTRESSO
             </span>
+          </div>
+          {/* Safe badge */}
+          <div
+            className="flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold"
+            style={{
+              background: "oklch(0.92 0.06 150 / 0.4)",
+              color: "oklch(0.35 0.14 155)",
+              border: "1px solid oklch(0.70 0.14 155 / 0.35)",
+            }}
+          >
+            <span style={{ fontSize: "10px" }}>🔒</span>
+            Safe
           </div>
         </div>
       </header>

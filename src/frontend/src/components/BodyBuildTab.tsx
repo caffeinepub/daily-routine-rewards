@@ -347,10 +347,10 @@ const MUSCLE_GROUPS = [
     color: "oklch(0.65 0.21 28)",
     bg: "oklch(0.96 0.03 28)",
     exercises: [
-      { name: "Push-Ups", sets: "4 × 15", videoId: "IODxDxX7oi4" },
-      { name: "Bench Press", sets: "4 × 10", videoId: "vcBig73ojpE" },
-      { name: "Chest Dips", sets: "3 × 12", videoId: "wjUmnZH528Y" },
-      { name: "Cable Fly", sets: "3 × 15", videoId: "Iwe6AmxVf7o" },
+      { name: "Push-Ups", sets: "4 × 15", videoId: "hZPFPLQq8Tg" },
+      { name: "Bench Press", sets: "4 × 10", videoId: "_nqoLVplORY" },
+      { name: "Chest Dips", sets: "3 × 12", videoId: "dKgkejpTgrY" },
+      { name: "Cable Fly", sets: "3 × 15", videoId: "keMZBSQA3vc" },
     ],
   },
   {
@@ -360,10 +360,10 @@ const MUSCLE_GROUPS = [
     color: "oklch(0.55 0.22 280)",
     bg: "oklch(0.96 0.04 280)",
     exercises: [
-      { name: "Pull-Ups", sets: "4 × 8", videoId: "eGo4IYlbE5g" },
-      { name: "Deadlift", sets: "3 × 6", videoId: "op9kVnSso6Q" },
-      { name: "Bent-Over Row", sets: "4 × 10", videoId: "vT2GjY_Umpw" },
-      { name: "Lat Pulldown", sets: "3 × 12", videoId: "CAwf7n6Luuc" },
+      { name: "Pull-Ups", sets: "4 × 8", videoId: "XB_7En-zf_M" },
+      { name: "Deadlift", sets: "3 × 6", videoId: "FW2aLAaUWlg" },
+      { name: "Bent-Over Row", sets: "4 × 10", videoId: "qFpHaHSmrAQ" },
+      { name: "Lat Pulldown", sets: "3 × 12", videoId: "JRF9MoMeRDU" },
     ],
   },
   {
@@ -373,10 +373,10 @@ const MUSCLE_GROUPS = [
     color: "oklch(0.72 0.18 60)",
     bg: "oklch(0.97 0.03 60)",
     exercises: [
-      { name: "Overhead Press", sets: "4 × 10", videoId: "2yjwXTZQDDI" },
-      { name: "Lateral Raise", sets: "3 × 15", videoId: "3VcKaXpzqRo" },
-      { name: "Front Raise", sets: "3 × 12", videoId: "sOoBbhEd_cY" },
-      { name: "Arnold Press", sets: "3 × 10", videoId: "6Z15_WdXmVw" },
+      { name: "Overhead Press", sets: "4 × 10", videoId: "GxwhHtxuB-0" },
+      { name: "Lateral Raise", sets: "3 × 15", videoId: "oaAMyd1MaYU" },
+      { name: "Front Raise", sets: "3 × 12", videoId: "8EcNMcUHOIc" },
+      { name: "Arnold Press", sets: "3 × 10", videoId: "K9JrnOuJrYE" },
     ],
   },
   {
@@ -387,9 +387,9 @@ const MUSCLE_GROUPS = [
     bg: "oklch(0.96 0.04 145)",
     exercises: [
       { name: "Bicep Curl", sets: "4 × 12", videoId: "ykJmrZ5v0Oo" },
-      { name: "Hammer Curl", sets: "3 × 12", videoId: "zC3nLlEvin4" },
+      { name: "Hammer Curl", sets: "3 × 12", videoId: "TwD-YGVP4Bk" },
       { name: "Incline Curl", sets: "3 × 10", videoId: "soxrZlIl35U" },
-      { name: "Concentration Curl", sets: "3 × 12", videoId: "0AUGkch3tzc" },
+      { name: "Concentration Curl", sets: "3 × 12", videoId: "Jvj2wV0vOYU" },
     ],
   },
   {
@@ -399,10 +399,10 @@ const MUSCLE_GROUPS = [
     color: "oklch(0.75 0.18 190)",
     bg: "oklch(0.96 0.04 190)",
     exercises: [
-      { name: "Tricep Dips", sets: "4 × 12", videoId: "0326dy_-CzM" },
-      { name: "Skull Crushers", sets: "3 × 12", videoId: "d_KZxkY_0cM" },
-      { name: "Overhead Extension", sets: "3 × 12", videoId: "YbX7Wd8jQ-Q" },
-      { name: "Rope Pushdown", sets: "3 × 15", videoId: "vB5OHsJ3EME" },
+      { name: "Tricep Dips", sets: "4 × 12", videoId: "EL_8EIixz0s" },
+      { name: "Skull Crushers", sets: "3 × 12", videoId: "NjRDvQtIbm4" },
+      { name: "Overhead Extension", sets: "3 × 12", videoId: "DpWFfHRFnAQ" },
+      { name: "Rope Pushdown", sets: "3 × 15", videoId: "kiuVA0gs3EI" },
     ],
   },
   {
@@ -412,9 +412,9 @@ const MUSCLE_GROUPS = [
     color: "oklch(0.60 0.20 310)",
     bg: "oklch(0.96 0.03 310)",
     exercises: [
-      { name: "Squats", sets: "4 × 12", videoId: "aclHkVaku9U" },
-      { name: "Lunges", sets: "3 × 10 each", videoId: "QOVaHwm-Q6U" },
-      { name: "Leg Press", sets: "4 × 12", videoId: "GvRgijoJ2xY" },
+      { name: "Squats", sets: "4 × 12", videoId: "pqY51FEZhMY" },
+      { name: "Lunges", sets: "3 × 10 each", videoId: "Z2n58m2i4jg" },
+      { name: "Leg Press", sets: "4 × 12", videoId: "IZxyjW7MPJQ" },
       { name: "Calf Raises", sets: "4 × 20", videoId: "gwLzBJYoWlI" },
     ],
   },
@@ -425,10 +425,10 @@ const MUSCLE_GROUPS = [
     color: "oklch(0.65 0.21 28)",
     bg: "oklch(0.96 0.03 28)",
     exercises: [
-      { name: "Plank", sets: "3 × 60s", videoId: "ASdvN_XEl_c" },
-      { name: "Crunches", sets: "4 × 20", videoId: "Xyd_fa5zoEU" },
-      { name: "Leg Raises", sets: "3 × 15", videoId: "l4kQd9eWclE" },
-      { name: "Russian Twists", sets: "3 × 20", videoId: "wkD8rjkodUI" },
+      { name: "Plank", sets: "3 × 60s", videoId: "pSHjTRCQxIw" },
+      { name: "Crunches", sets: "4 × 20", videoId: "MKmrqcoCZ-M" },
+      { name: "Leg Raises", sets: "3 × 15", videoId: "JB2oyawG9KI" },
+      { name: "Russian Twists", sets: "3 × 20", videoId: "U8xMpOkxXtg" },
     ],
   },
   {
@@ -438,9 +438,9 @@ const MUSCLE_GROUPS = [
     color: "oklch(0.68 0.18 355)",
     bg: "oklch(0.97 0.03 355)",
     exercises: [
-      { name: "Hip Thrust", sets: "4 × 12", videoId: "SEdqd9LBGCo" },
-      { name: "Glute Bridge", sets: "4 × 15", videoId: "wPM8icPu6H8" },
-      { name: "Sumo Squat", sets: "3 × 12", videoId: "L8fvypPrzzs" },
+      { name: "Hip Thrust", sets: "4 × 12", videoId: "LM8XfHCko84" },
+      { name: "Glute Bridge", sets: "4 × 15", videoId: "OzUNRvB-Hj8" },
+      { name: "Sumo Squat", sets: "3 × 12", videoId: "qJQyuM3bLEw" },
       { name: "Cable Kickback", sets: "3 × 12", videoId: "CGoOm2XYLVY" },
     ],
   },
@@ -454,17 +454,17 @@ const MUSCLE_GROUPS = [
       {
         name: "Foam Rolling – Full Body",
         sets: "10 min",
-        videoId: "LoVNMiEeTt4",
+        videoId: "Yn4NcFjdkw0",
       },
       {
         name: "Hip Flexor Stretch",
         sets: "3 × 60s each",
-        videoId: "kDnyOqzNuNk",
+        videoId: "R_GrdaE5VxQ",
       },
       {
         name: "Child's Pose + Thoracic Rotation",
         sets: "3 × 45s",
-        videoId: "ghWFZUCf55A",
+        videoId: "qTJFc-_5GVs",
       },
       {
         name: "Cat-Cow Spinal Mobility",
@@ -493,13 +493,13 @@ const MUSCLE_GROUPS = [
       {
         name: "Turmeric Golden Milk Recipe",
         sets: "Daily",
-        videoId: "8rNhOmjVkis",
+        videoId: "8BT_-DL5ArM",
       },
       { name: "Epsom Salt Soak", sets: "20 min soak", videoId: "KrZONO-PwIE" },
       {
         name: "Ginger Anti-Inflammation Tea",
         sets: "1–2 cups/day",
-        videoId: "V7L_GQFK-_4",
+        videoId: "xH9aJJCbDME",
       },
       {
         name: "DIY Muscle Rub (Arnica/Peppermint)",
@@ -512,8 +512,21 @@ const MUSCLE_GROUPS = [
 
 function ExerciseLibrary() {
   const [selected, setSelected] = useState<string | null>(null);
-  const [customLinks, setCustomLinks] = useState<Record<string, string>>({});
-  const [linkInputs, setLinkInputs] = useState<Record<string, string>>({});
+
+  // Pre-populate all video links from defaults
+  const defaultLinks: Record<string, string> = {};
+  const defaultInputs: Record<string, string> = {};
+  for (const g of MUSCLE_GROUPS) {
+    for (const ex of g.exercises) {
+      defaultLinks[ex.name] = ex.videoId;
+      defaultInputs[ex.name] = `https://www.youtube.com/watch?v=${ex.videoId}`;
+    }
+  }
+
+  const [customLinks, setCustomLinks] =
+    useState<Record<string, string>>(defaultLinks);
+  const [linkInputs, setLinkInputs] =
+    useState<Record<string, string>>(defaultInputs);
 
   const group = MUSCLE_GROUPS.find((g) => g.id === selected);
 

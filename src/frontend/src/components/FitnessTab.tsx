@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import L from "leaflet";
 import { Activity, MapPin, Minus, Plus, RotateCcw } from "lucide-react";
+import "leaflet/dist/leaflet.css";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const STEP_GOAL = 10000;
@@ -39,6 +41,21 @@ interface StepData {
   count: number;
   date: string;
 }
+
+// Custom div icons
+const startIcon = L.divIcon({
+  className: "",
+  html: `<div style="width:14px;height:14px;border-radius:50%;background:#22c55e;border:2px solid white;box-shadow:0 0 4px rgba(0,0,0,0.5)"></div>`,
+  iconSize: [14, 14],
+  iconAnchor: [7, 7],
+});
+
+const currentIcon = L.divIcon({
+  className: "",
+  html: `<div style="width:16px;height:16px;border-radius:50%;background:#3b82f6;border:2px solid white;box-shadow:0 0 8px rgba(59,130,246,0.8);animation:pulse 1.5s infinite"></div>`,
+  iconSize: [16, 16],
+  iconAnchor: [8, 8],
+});
 
 export default function FitnessTab() {
   const dateStr = getTodayStr();
@@ -97,7 +114,6 @@ export default function FitnessTab() {
     setMotionSupported(hasDME);
     if (!hasDME) return;
 
-    // Check if iOS permission API needed
     const needsPermission =
       typeof (
         DeviceMotionEvent as { requestPermission?: () => Promise<string> }
@@ -142,85 +158,111 @@ export default function FitnessTab() {
   });
   const [tracking, setTracking] = useState(false);
   const watchIdRef = useRef<number | null>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  // Leaflet refs
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<L.Map | null>(null);
+  const polylineRef = useRef<L.Polyline | null>(null);
+  const startMarkerRef = useRef<L.Marker | null>(null);
+  const currentMarkerRef = useRef<L.Marker | null>(null);
 
   // Persist waypoints
   useEffect(() => {
     localStorage.setItem(`gpsTrack_${dateStr}`, JSON.stringify(waypoints));
   }, [waypoints, dateStr]);
 
-  // Draw path on canvas
+  // Initialize Leaflet map
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    if (!mapContainerRef.current || mapRef.current) return;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const map = L.map(mapContainerRef.current, {
+      center: [20.5937, 78.9629],
+      zoom: 16,
+      zoomControl: true,
+      attributionControl: true,
+    });
 
-    // Background
-    ctx.fillStyle = "oklch(0.94 0.03 230)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+      {
+        attribution: "Tiles &copy; Esri",
+        maxZoom: 19,
+      },
+    ).addTo(map);
 
-    if (waypoints.length < 2) {
-      ctx.fillStyle = "oklch(0.40 0.01 85)";
-      ctx.font = "14px Figtree, sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText(
-        "Start tracking to see your path",
-        canvas.width / 2,
-        canvas.height / 2,
-      );
-      return;
+    mapRef.current = map;
+
+    return () => {
+      map.remove();
+      mapRef.current = null;
+      polylineRef.current = null;
+      startMarkerRef.current = null;
+      currentMarkerRef.current = null;
+    };
+  }, []);
+
+  // Update map when waypoints change
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+
+    const latLngs: L.LatLngTuple[] = waypoints.map((w) => [w.lat, w.lng]);
+
+    // Update polyline
+    if (polylineRef.current) {
+      polylineRef.current.setLatLngs(latLngs);
+    } else if (latLngs.length >= 2) {
+      polylineRef.current = L.polyline(latLngs, {
+        color: "#f97316",
+        weight: 4,
+        opacity: 0.85,
+      }).addTo(map);
     }
 
-    const lats = waypoints.map((w) => w.lat);
-    const lngs = waypoints.map((w) => w.lng);
-    const minLat = Math.min(...lats);
-    const maxLat = Math.max(...lats);
-    const minLng = Math.min(...lngs);
-    const maxLng = Math.max(...lngs);
+    // Start marker (green)
+    if (waypoints.length > 0) {
+      const start = waypoints[0];
+      if (!startMarkerRef.current) {
+        startMarkerRef.current = L.marker([start.lat, start.lng], {
+          icon: startIcon,
+        }).addTo(map);
+      }
+    }
 
-    const padding = 30;
-    const scaleX =
-      maxLng === minLng ? 1 : (canvas.width - padding * 2) / (maxLng - minLng);
-    const scaleY =
-      maxLat === minLat ? 1 : (canvas.height - padding * 2) / (maxLat - minLat);
+    // Current position marker (blue pulsing)
+    if (waypoints.length > 0) {
+      const last = waypoints[waypoints.length - 1];
+      if (currentMarkerRef.current) {
+        currentMarkerRef.current.setLatLng([last.lat, last.lng]);
+      } else {
+        currentMarkerRef.current = L.marker([last.lat, last.lng], {
+          icon: currentIcon,
+        }).addTo(map);
+      }
 
-    const toX = (lng: number) => padding + (lng - minLng) * scaleX;
-    const toY = (lat: number) =>
-      canvas.height - padding - (lat - minLat) * scaleY;
-
-    // Draw path
-    ctx.beginPath();
-    ctx.strokeStyle = "oklch(0.78 0.19 75)";
-    ctx.lineWidth = 3;
-    ctx.lineJoin = "round";
-    ctx.lineCap = "round";
-    waypoints.forEach((wp, i) => {
-      if (i === 0) ctx.moveTo(toX(wp.lng), toY(wp.lat));
-      else ctx.lineTo(toX(wp.lng), toY(wp.lat));
-    });
-    ctx.stroke();
-
-    // Start dot (green)
-    const start = waypoints[0];
-    ctx.beginPath();
-    ctx.arc(toX(start.lng), toY(start.lat), 7, 0, Math.PI * 2);
-    ctx.fillStyle = "oklch(0.72 0.18 145)";
-    ctx.fill();
-
-    // End dot (gold)
-    const end = waypoints[waypoints.length - 1];
-    ctx.beginPath();
-    ctx.arc(toX(end.lng), toY(end.lat), 7, 0, Math.PI * 2);
-    ctx.fillStyle = "oklch(0.78 0.19 75)";
-    ctx.fill();
-  }, [waypoints]);
+      // Auto-pan if tracking
+      if (tracking) {
+        map.panTo([last.lat, last.lng]);
+      }
+    }
+  }, [waypoints, tracking]);
 
   const startTracking = () => {
     if (!navigator.geolocation) return;
     setTracking(true);
+
+    // Center map on current position first
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        mapRef.current?.setView(
+          [pos.coords.latitude, pos.coords.longitude],
+          17,
+        );
+      },
+      () => {},
+      { enableHighAccuracy: true },
+    );
+
     watchIdRef.current = navigator.geolocation.watchPosition(
       (pos) => {
         const wp: Waypoint = {
@@ -246,6 +288,13 @@ export default function FitnessTab() {
   const clearTrack = () => {
     stopTracking();
     setWaypoints([]);
+    // Remove map overlays
+    polylineRef.current?.remove();
+    polylineRef.current = null;
+    startMarkerRef.current?.remove();
+    startMarkerRef.current = null;
+    currentMarkerRef.current?.remove();
+    currentMarkerRef.current = null;
   };
 
   const totalDistance = waypoints.reduce((acc, wp, i) => {
@@ -280,7 +329,6 @@ export default function FitnessTab() {
           </h2>
         </div>
 
-        {/* Big step number */}
         <div className="text-center py-2">
           <div
             className="font-display font-bold text-6xl"
@@ -291,7 +339,6 @@ export default function FitnessTab() {
           <p className="text-sm text-muted-foreground mt-1">steps today</p>
         </div>
 
-        {/* Progress bar */}
         <div className="flex flex-col gap-1.5">
           <div className="flex justify-between text-xs text-muted-foreground">
             <span>{progressPct}% of daily goal</span>
@@ -300,7 +347,6 @@ export default function FitnessTab() {
           <Progress value={progressPct} className="h-3" />
         </div>
 
-        {/* Stats row */}
         <div className="grid grid-cols-2 gap-3">
           <div
             className="rounded-xl p-3 text-center"
@@ -332,7 +378,6 @@ export default function FitnessTab() {
           </div>
         </div>
 
-        {/* Controls */}
         {motionSupported === false && (
           <div className="flex items-center justify-center gap-3">
             <Button
@@ -391,7 +436,7 @@ export default function FitnessTab() {
         </Button>
       </div>
 
-      {/* GPS Map */}
+      {/* GPS Satellite Map */}
       <div
         className="rounded-2xl p-5 flex flex-col gap-4"
         style={{
@@ -406,17 +451,24 @@ export default function FitnessTab() {
             style={{ color: "oklch(0.78 0.19 75)" }}
           />
           <h2 className="font-display font-bold text-lg text-foreground">
-            GPS Movement Map
+            GPS Satellite Map
           </h2>
+          <span
+            className="ml-auto text-xs px-2 py-0.5 rounded-full font-semibold"
+            style={{
+              background: "oklch(0.72 0.18 145 / 0.15)",
+              color: "oklch(0.55 0.18 145)",
+            }}
+          >
+            Live
+          </span>
         </div>
 
-        {/* Canvas */}
-        <canvas
+        {/* Leaflet map container */}
+        <div
           data-ocid="fitness.canvas_target"
-          ref={canvasRef}
-          width={400}
-          height={260}
-          className="w-full rounded-xl"
+          ref={mapContainerRef}
+          className="h-64 w-full rounded-xl overflow-hidden"
           style={{ border: "1px solid oklch(0.25 0.015 55)" }}
         />
 
@@ -510,7 +562,7 @@ export default function FitnessTab() {
             }}
           >
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            Tracking your movement…
+            Tracking your movement on satellite map…
           </div>
         )}
       </div>
