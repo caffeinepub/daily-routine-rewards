@@ -1,0 +1,24 @@
+{
+  "name": "DISTRESSO",
+  "short_name": "Distresso",
+  "description": "Your daily routine and wellness companion",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1208",
+  "theme_color": "#c9943a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/uploads/distresso-1.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/uploads/distresso-1.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
